@@ -232,13 +232,16 @@ export default function Home() {
         <Container maxW="container.xl">
           <Flex justifyContent="center" direction="column" alignItems="center">
             <HStack mb={12}>
-              <Link href="#">
+              <Link href="https://www.facebook.com/marzuki.r/" isExternal>
                 <Image src={ICFacebook} w="68px" />
               </Link>
-              <Link href="#">
+              <Link
+                href="https://www.linkedin.com/in/enal-marzuki-6a12a91a3/"
+                isExternal
+              >
                 <Image src={ICLinkedIn} w="68px" />
               </Link>
-              <Link href="#">
+              <Link href="https://github.com/enalmarzuki" isExternal>
                 <Image src={ICGitHub} w="68px" />
               </Link>
             </HStack>
