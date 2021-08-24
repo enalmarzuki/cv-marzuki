@@ -1,0 +1,28 @@
+.container-hero {
+  clip-path: polygon(0 0, 100% 0%, 100% 92%, 0 100%);
+}
+
+.container-overlay {
+  position: relative;
+}
+
+.container-overlay .overlay-link {
+  transition: 0.3s all ease-in-out;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  z-index: 2;
+}
+
+.container-overlay:hover .overlay-link {
+  background-color: rgba(0, 0, 0, 0.356);
+  opacity: 1;
+}
+
+.footer-container {
+  clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0% 100%);
+}

@@ -1,4 +1,4 @@
-import { DownloadIcon, EmailIcon } from "@chakra-ui/icons";
+import { DownloadIcon, EmailIcon, ViewIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -8,10 +8,14 @@ import {
   HStack,
   Image,
   Link,
+  LinkBox,
+  LinkOverlay,
+  Spinner,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { useQuery } from "react-query";
 import {
   ICBootstrap,
   ICCss,
@@ -27,26 +31,101 @@ import {
   IMGProjek2,
 } from "../../assets";
 import { Hero, Navbar, TitleSection } from "../../components";
+import { Firebase } from "../../config";
+
+type Projects = {
+  id: number;
+  image: string;
+};
+
+export type HeroProps = {
+  hero: {
+    title: string;
+  };
+  projects: {
+    [key: string]: Projects;
+  };
+};
+
+const getLandingPage = async () => {
+  return await new Promise((resolve, reject) => {
+    Firebase.database()
+      .ref("landing-page/")
+      .on("value", (snapshot) => {
+        resolve(snapshot.val());
+      });
+  });
+};
 
 export default function Home() {
+  const { data, isLoading } = useQuery("getLandingPage", getLandingPage);
+
+  if (isLoading) {
+    return (
+      <Box
+        height="100vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Box>
+    );
+  }
+
   return (
     <>
-      <Box position="absolute" width="100%">
+      <Box position="absolute" zIndex={2} width="100%">
         <Navbar />
       </Box>
-      <Hero />
+      <Hero data={data} />
 
       <Container maxW="container.xl">
         {/* Projek */}
         <Box my={28}>
           <TitleSection withSeeAll title="Yang Telah Di Kerjakan" />
           <Stack mt={9} spacing={9}>
-            <Box>
-              <Image src={IMGProjek1} />
-            </Box>
-            <Box>
-              <Image src={IMGProjek2} />
-            </Box>
+            <LinkBox className="container-overlay">
+              <LinkOverlay href="https://enal-marzuki.web.app/" isExternal>
+                <Image src={IMGProjek1} />
+                <Box
+                  display={{ base: "flex" }}
+                  alignItems="center"
+                  justifyContent="center"
+                  className="overlay-link"
+                >
+                  <ViewIcon
+                    w={{ base: 6, md: 12 }}
+                    h={{ base: 6, md: 12 }}
+                    color="#fff"
+                  />
+                </Box>
+              </LinkOverlay>
+            </LinkBox>
+
+            <LinkBox className="container-overlay">
+              <LinkOverlay href="https://enal-marzuki.web.app/" isExternal>
+                <Image src={IMGProjek2} />
+                <Box
+                  display={{ base: "flex" }}
+                  alignItems="center"
+                  justifyContent="center"
+                  className="overlay-link"
+                >
+                  <ViewIcon
+                    w={{ base: 6, md: 12 }}
+                    h={{ base: 6, md: 12 }}
+                    color="#fff"
+                  />
+                </Box>
+              </LinkOverlay>
+            </LinkBox>
           </Stack>
         </Box>
         {/* Projek */}
@@ -228,7 +307,12 @@ export default function Home() {
         </Box>
         {/* Kemampuan */}
       </Container>
-      <Box bgGradient="linear(to-tr, #00CAD4, #0179E2)" pt={24} pb="8">
+      <Box
+        className="footer-container"
+        bgGradient="linear(to-tr, #00CAD4, #0179E2)"
+        pt={24}
+        pb="8"
+      >
         <Container maxW="container.xl">
           <Flex justifyContent="center" direction="column" alignItems="center">
             <HStack mb={12}>

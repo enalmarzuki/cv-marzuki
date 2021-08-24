@@ -12,14 +12,20 @@ import {
 import React from "react";
 import Typewriter from "typewriter-effect";
 import { ILHero } from "../../../assets";
+import { HeroProps } from "../../../pages/Home";
 
-export default function Hero() {
+// type HeroCompProps = {
+//   data: HeroProps;
+// };
+
+export default function Hero({ data }: { data: HeroProps }) {
   return (
     <Flex
-      height={{ base: "max-content", md: "100vh" }}
+      height={{ base: "max-content", md: "115vh" }}
       bgGradient="linear(to-tr, #00CAD4, #0179E2)"
       py={{ base: "20" }}
       alignItems="center"
+      className="container-hero"
     >
       <Container maxW="container.xl">
         <Flex
@@ -39,9 +45,7 @@ export default function Hero() {
               />
             </Heading>
             <Text mt={7} lineHeight="7" mb={8}>
-              Saya seorang Frontend Developer dan memiliki pengalaman 1 tahun di
-              bidang ini. Dalam 1 tahun ini saya terbiasa menggunakan Javascript
-              / ReactJS / React Native dalam membangun sebuah aplikasi.
+              {data.hero.title}
             </Text>
             <Button
               leftIcon={<DownloadIcon />}
