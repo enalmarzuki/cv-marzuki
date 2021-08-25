@@ -14,11 +14,11 @@ import Typewriter from "typewriter-effect";
 import { ILHero } from "../../../assets";
 import { HeroProps } from "../../../pages/Home";
 
-// type HeroCompProps = {
-//   data: HeroProps;
-// };
+type HeroCompProps = {
+  data: HeroProps | unknown;
+};
 
-export default function Hero({ data }: { data: HeroProps }) {
+export default function Hero({ data }: HeroCompProps) {
   return (
     <Flex
       height={{ base: "max-content", md: "115vh" }}

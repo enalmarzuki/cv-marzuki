@@ -5,6 +5,10 @@ import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 import "./index.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+AOS.init();
 
 ReactDOM.render(
   <React.StrictMode>
