@@ -33,22 +33,22 @@ import {
 import { Hero, Navbar, TitleSection } from "../../components";
 import { Firebase } from "../../config";
 
-type Projects = {
-  id: number;
+interface Project {
+  id: string;
   image: string;
-};
+}
 
 export type HeroProps = {
   hero: {
     title: string;
   };
   projects: {
-    [key: string]: Projects;
+    [key: string]: Project;
   };
 };
 
 const getLandingPage = async () => {
-  return await new Promise((resolve, reject) => {
+  return await new Promise((resolve) => {
     Firebase.database()
       .ref("landing-page/")
       .on("value", (snapshot) => {
@@ -81,54 +81,63 @@ export default function Home() {
 
   return (
     <>
-      <Box position="absolute" zIndex={2} width="100%">
-        <Navbar />
-      </Box>
-      <Hero data={data} />
+      <div
+        data-aos="fade-zoom-in"
+        data-aos-offset="200"
+        data-aos-easing="ease-in-sine"
+        data-aos-duration="1000"
+      >
+        <Box position="absolute" zIndex={2} width="100%">
+          <Navbar />
+        </Box>
+        <Hero data={data} />
+      </div>
 
       <Container maxW="container.xl">
-        {/* Projek */}
-        <Box my={28}>
-          <TitleSection withSeeAll title="Yang Telah Di Kerjakan" />
-          <Stack mt={9} spacing={9}>
-            <LinkBox className="container-overlay">
-              <LinkOverlay href="https://enal-marzuki.web.app/" isExternal>
-                <Image src={IMGProjek1} />
-                <Box
-                  display={{ base: "flex" }}
-                  alignItems="center"
-                  justifyContent="center"
-                  className="overlay-link"
-                >
-                  <ViewIcon
-                    w={{ base: 6, md: 12 }}
-                    h={{ base: 6, md: 12 }}
-                    color="#fff"
-                  />
-                </Box>
-              </LinkOverlay>
-            </LinkBox>
+        <div data-aos="fade-up" data-aos-duration="500">
+          {/* Projek */}
+          <Box my={28}>
+            <TitleSection withSeeAll title="Yang Telah Di Kerjakan" />
+            <Stack mt={9} spacing={9}>
+              <LinkBox className="container-overlay">
+                <LinkOverlay href="https://enal-marzuki.web.app/" isExternal>
+                  <Image src={IMGProjek1} />
+                  <Box
+                    display={{ base: "flex" }}
+                    alignItems="center"
+                    justifyContent="center"
+                    className="overlay-link"
+                  >
+                    <ViewIcon
+                      w={{ base: 6, md: 12 }}
+                      h={{ base: 6, md: 12 }}
+                      color="#fff"
+                    />
+                  </Box>
+                </LinkOverlay>
+              </LinkBox>
 
-            <LinkBox className="container-overlay">
-              <LinkOverlay href="https://enal-marzuki.web.app/" isExternal>
-                <Image src={IMGProjek2} />
-                <Box
-                  display={{ base: "flex" }}
-                  alignItems="center"
-                  justifyContent="center"
-                  className="overlay-link"
-                >
-                  <ViewIcon
-                    w={{ base: 6, md: 12 }}
-                    h={{ base: 6, md: 12 }}
-                    color="#fff"
-                  />
-                </Box>
-              </LinkOverlay>
-            </LinkBox>
-          </Stack>
-        </Box>
-        {/* Projek */}
+              <LinkBox className="container-overlay">
+                <LinkOverlay href="https://enal-marzuki.web.app/" isExternal>
+                  <Image src={IMGProjek2} />
+                  <Box
+                    display={{ base: "flex" }}
+                    alignItems="center"
+                    justifyContent="center"
+                    className="overlay-link"
+                  >
+                    <ViewIcon
+                      w={{ base: 6, md: 12 }}
+                      h={{ base: 6, md: 12 }}
+                      color="#fff"
+                    />
+                  </Box>
+                </LinkOverlay>
+              </LinkBox>
+            </Stack>
+          </Box>
+          {/* Projek */}
+        </div>
 
         {/* Kerja sama */}
         <Box
